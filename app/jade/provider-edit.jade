@@ -1,17 +1,19 @@
 .provider-edit
+  .errors.hidden Some Error
   .icon
-    img.shadow-icon(data-src="#{providerIcon}" scalable="true")
+    img.shadow-icon(data-src="#{provider.icon}" scalable="true")
   .vals
-    .val
-      .label Account Name
-      input.lexi(value="#{name}")
-    .val
-      .label Default Region
-      input.lexi(value="#{defaultRegion.name}")
-    each field in authFields
+    .standard
       .val
-        .label= field.label
-        input.lexi(value="#{field.val}" data-key="#{field.key}")
+        .label Account Name
+        input.lexi(value="#{name}")
+      if isCustom
+        .val
+          .label Endpoint
+          input#endpoint.lexi(value="#{provider.endpoint}")
+          .button#test-endpoint.lifecycle.hidden Test Endpoint
+    .provider-specific
+
   .save-section
     .cancel#cancel Cancel
     .button.lifecycle#save Save 

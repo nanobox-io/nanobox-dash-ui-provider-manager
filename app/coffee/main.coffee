@@ -1,30 +1,26 @@
 ProviderList = require 'provider-list'
 ProviderEdit = require 'provider-edit'
 
-class Providers
+class ProviderAccounts
 
   constructor: (@$el, @data) ->
-    @providerList = new ProviderList @$el, @data.providers, @showProvider
+    @accountList = new ProviderList @$el, @data.accounts, @showAccount
 
-  showProvider : (providerId) =>
-    @providerList.hide()
-    @provider = new ProviderEdit @$el, @getProviderData(providerId), @saveProvider, @hideProvider
+  showAccount : (providerId) =>
+    @accountList.hide()
+    @account = new ProviderEdit @$el, @getAccountData(providerId), @data.endpointTester, @data.verifyAccount, @data.updateProvider, @hideAccount
 
-  saveProvider : (data) ->
-    console.log "saving:"
-    console.log data
+  hideAccount : () =>
+    @account.destroy()
+    @account = null
+    @accountList.show()
 
-  hideProvider : () =>
-    @provider.destroy()
-    @provider = null
-    @providerList.show()
-
-  getProviderData : (id) ->
-    for provider in @data.providers
-      if id == provider.id
-        return provider
+  getAccountData : (id) ->
+    for account in @data.accounts
+      if id == account.id
+        return account
 
 
 
 window.nanobox ||= {}
-nanobox.Providers = Providers
+nanobox.ProviderAccounts = ProviderAccounts

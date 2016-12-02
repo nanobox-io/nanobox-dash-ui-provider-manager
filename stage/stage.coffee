@@ -3,15 +3,14 @@ ProvidersShim = require './shim/providers'
 shim = new ProvidersShim()
 
 # ------------------------------------ Simulate rails methods..
-endpointTester : (endpoint) ->
+endpointTester = (endpoint, cb) ->
   console.log "Testing endpoint : #{endpoint} (fake)"
   setTimeout ()=>
     data =
+      provider : shim.getUnofficialProvider()
       error    : "Unable to reach endpoint."
-      provider : providerShim.getUnofficialProvider()
     if Math.random() > 0.6 then data.error = false
     cb data
-
   ,
     1200 * Math.random()
 
@@ -30,14 +29,23 @@ verifyAccount = (provider, fields, endpoint, cb)->
   ,
     1200 * Math.random()
 
-updateProvider : (provider) ->
-  console.log "updating provider:"
-  console.log provider
+updateProvider = (data, cb) ->
+  console.log "update!!!!!!!!!"
+  console.log cb
+  setTimeout ()->
+    data =
+      error: "Unable to save.."
+    if Math.random() < 0.6 then data.error = false
+    cb data
+  ,
+    1200 * Math.random()
+
+
 
 params =
-  providers       : shim.getProviders()
+  accounts        : shim.getAccounts()
   endpointTester  : endpointTester
   verifyAccount   : verifyAccount
   updateProvider  : updateProvider
 
-app = new nanobox.Providers( $(".main-holder"), params )
+app = new nanobox.ProviderAccounts( $(".main-holder"), params )

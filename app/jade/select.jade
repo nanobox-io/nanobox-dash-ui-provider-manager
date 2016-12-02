@@ -1,0 +1,8 @@
+select.lexi(class="#{classes}")
+  each item in items
+    if item.group != null
+      optgroup(label="#{item.group}")
+        each subItem in item.items
+          option(value="#{subItem.id}" selected=subItem.selected)= subItem.name
+    else
+      option(value="#{item.id}" selected=item.selected)= item.name

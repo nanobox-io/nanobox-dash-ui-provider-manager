@@ -1,0 +1,7 @@
+.val
+  .label Default Region
+  #regions
+each field in provider.authFields
+  .val
+    .label= field.label
+    input.lexi.auth-field(value="#{field.val}" data-key="#{field.key}")

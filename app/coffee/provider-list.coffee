@@ -2,8 +2,8 @@ providerList = require 'jade/provider-list'
 
 module.exports = class ProviderList
 
-  constructor: ($el, providers, onEditProviderCb) ->
-    @$node = $ providerList( {providers:providers} )
+  constructor: ($el, accounts, onEditProviderCb) ->
+    @$node = $ providerList( {accounts:accounts} )
     $el.append @$node
     castShadows()
 
