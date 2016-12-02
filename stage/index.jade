@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+  
+  head
+    title Providers
+
+    // build:remove 
+    link(href="stage/css/stage.css", rel="stylesheet")
+    link(href="bower-libs/lexi/rel/style.css", rel="stylesheet")
+    link(href="css/shared-svg.css", rel="stylesheet")
+    // endbuild
+    
+    // build:css style.css
+    link(href="css/main.css", rel="stylesheet")
+    // endbuild
+
+  body
+    .main-holder
+    // build:remove 
+    script(src="bower-libs/jquery/dist/jquery.js")
+    script(src="bower-libs/jade/runtime.js")
+    script(src="bower-libs/shadow-icons/rel/app.js")
+    script(src="https://use.typekit.net/cqd5kth.js")
+    script(src="bower-libs/lexi/rel/app.js")
+    script(src="js/shared-svg.js")
+    // endbuild
+
+    // build:js app.js
+    script(src="js/main.js")
+    // endbuild
+    
+    // build:remove 
+    script(src="stage/js/stage.js")
+    // endbuild
+    
+    
+    
+    // build:remove 
+    script(src="http://localhost:35729/livereload.js")
+    // endbuild

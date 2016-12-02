@@ -1,0 +1,13 @@
+.provider-list
+  each provider in providers
+    .provider
+      .icon
+        img.shadow-icon(data-src="#{provider.providerIcon}" scalable="true")
+      .info
+        .name=provider.name
+        .details
+          .label Default Region
+          .val=provider.defaultRegion.name
+          .label TotalApps
+          .val=provider.apps.length
+      .button(data-id="#{provider.id}") Manage

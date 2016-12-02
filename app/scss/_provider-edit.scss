@@ -1,0 +1,30 @@
+.provider-edit       {position: relative;
+  .icon              {position: absolute; top:-25px; left:-25px; width:70px; height:70px; background: white; padding:15px; border-radius: 50%;
+    #digital-ocean   {margin-top:0px; margin-right:-6px; }
+    #aws             {margin-top:4px; margin-right:-8px; margin-left:-5px; }
+  }
+  .vals              {background:#09A6EC; padding:40px;
+    .val             {display: flex; align-items: center; margin:18px 0;
+      .label         {min-width:120px; text-align: right; margin-right:10px; text-transform: uppercase; font-weight:$bold; color:#006EAD; font-size:13px;
+        &:after      {content:" : "}
+      }
+      input          {flex-grow: 2; border-bottom-color:#128FD6; color:white; font-size:19px; font-weight: $semibold; transition: border-color 300ms; 
+        &:focus      {border-bottom-color:white; }
+      }
+    }
+  }
+  .save-section      {display: flex; align-items: center; justify-content: flex-end; font-size:14px; font-style:italic; margin-top:10px;
+    .cancel          {color:#09A6EC; margin-right:30px; cursor:pointer; }
+    .button          {background: #09A6EC; color:white; font-size:14px; padding:0 20px;}
+  }
+  .apps              {margin-top:20px;
+    h2               {margin-bottom:35px; }
+    .app             {display: flex; color:#034C66; font-size:14px; align-items: center; border-bottom: 1px solid #D1DCDF; padding:15px 0;
+      &:last-of-type {border:none; }
+      .name          {}
+      a              {
+        &.manage     {margin:0 25px 0 auto;}
+      }
+    }
+  }
+}
