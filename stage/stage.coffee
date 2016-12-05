@@ -30,8 +30,9 @@ verifyAccount = (provider, fields, endpoint, cb)->
     1200 * Math.random()
 
 updateProvider = (data, cb) ->
-  console.log "update!!!!!!!!!"
-  console.log cb
+  console.log "UPDATED DATA"
+  console.log "------------------------------------------------"
+  console.log data
   setTimeout ()->
     data =
       error: "Unable to save.."

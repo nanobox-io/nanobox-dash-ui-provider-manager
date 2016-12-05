@@ -5,7 +5,8 @@ select               = require 'jade/select'
 module.exports = class Provider
 
   constructor: ($el, @accountData, @testEndpoint, @verifyAccount, @save, onCancel) ->
-    @provider = @accountData.provider
+    @provider      = @accountData.provider    # provider
+    @validEndpoint = @provider.endpoint       # Initial endpint if it exists
     if @accountData.provider.endpoint?
       @accountData.isCustom = true
     @$node = $ providerEdit( @accountData )
@@ -28,30 +29,6 @@ module.exports = class Provider
 
   # ------------------------------------ Events
 
-
-  onSaveClick : () ->
-    @clearErrors()
-    @$saveBtn.text('Verifying').addClass 'ing'
-    authFields = {}
-    for item in $(".auth-field", @$node)
-      authFields[item.getAttribute('data-key')] = item.value
-
-    @verifyAccount @provider, authFields, @validEndpoint, (results)=>
-      if results.error
-        @addError results.error
-        @$saveBtn.text('Save').removeClass 'ing'
-      else
-        @$saveBtn.text('Saving')
-        data = {}
-        @save data, (saveResults)=>
-          if saveResults.error
-            @$saveBtn.text('Save').removeClass 'ing'
-            @addError saveResults.error
-          else
-            @$saveBtn.text('Saved!').removeClass('ing').addClass "success"
-            setTimeout "location.reload(true);", 1000
-
-
   onEndpointEdit : (newVal) ->
     @validEndpoint = null
     if newVal != @accountData.endpoint
@@ -65,7 +42,7 @@ module.exports = class Provider
     @$testEndpointBtn.addClass 'ing'
     @$testEndpointBtn.text 'Testing...'
     $(".errors", @$node).addClass 'hidden'
-    # Test the endpoing
+    # Test the endpoint
     @testEndpoint endpoint, (results)=>
       @$testEndpointBtn.removeClass 'ing'
       # Error!
@@ -81,6 +58,38 @@ module.exports = class Provider
         @$testEndpointBtn.addClass 'success'
         # add the auth fields for the newly retrieved endpoint
         @addAuthFields()
+
+  onSaveClick : () ->
+    @clearErrors()
+    @$saveBtn.text('Verifying').addClass 'ing'
+    authFields = {}
+    for item in $(".auth-field", @$node)
+      authFields[item.getAttribute('data-key')] = item.value
+
+    @verifyAccount @provider, authFields, @validEndpoint, (results)=>
+      # Error verifying account:
+      if results.error
+        @addError results.error
+        @$saveBtn.text('Save').removeClass 'ing'
+      # Account verification successful!
+      else
+        @$saveBtn.text('Saving')
+        # Grab all the data and save it via rails:
+        data = {}
+        $nonAuthFields = $("input:not(.auth-field)")
+        for item in $nonAuthFields
+          data[item.getAttribute('data-key')] = item.value
+        data.authFields = authFields
+        data.defaultRegion = $("#regions select")[0].value
+        @save data, (saveResults)=>
+          # Error Saving:
+          if saveResults.error
+            @$saveBtn.text('Save').removeClass 'ing'
+            @addError saveResults.error
+          # Save Successful!
+          else
+            @$saveBtn.text('Saved!').removeClass('ing').addClass "success"
+            setTimeout "location.reload(true);", 1000
 
   # ------------------------------------ Helpers
 
