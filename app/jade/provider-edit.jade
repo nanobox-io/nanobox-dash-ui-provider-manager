@@ -22,5 +22,5 @@
     each app in apps
       .app
         .name= app.name
-        a.manage(href="#") Manage
-        a(href="#") Remove
+        a.manage(href="#{app.managePath}") Manage
+        a(href="#{app.removePath}") Remove

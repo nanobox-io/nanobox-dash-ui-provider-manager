@@ -4,7 +4,7 @@ ProviderEdit = require 'provider-edit'
 class ProviderAccounts
 
   constructor: (@$el, @data) ->
-    @accountList = new ProviderList @$el, @data.accounts, @showAccount
+    @accountList = new ProviderList @$el, @data.accounts, @showAccount, @data.addProviderClick
 
   showAccount : (providerId) =>
     @accountList.hide()
