@@ -11,7 +11,7 @@ module.exports = class ProvidersShim
         provider:
           id:'do'
           name:"Personal"
-          icon:'digital-ocean'
+          icon:'custom'
           endpoint        : "http://some.endpoint.com/asdf"
           defaultRegion   : {name: "New York 1", id: "nyc1"}
           regions: [
@@ -55,9 +55,9 @@ module.exports = class ProvidersShim
             {label:'API Key', key:'api_key', val:"asdf" }
           ]
           regions:[
-            {name: "New York 1", id: "nyc1"}
-            {name: "New York 2", id: "nyc2"}
-            {name: "New York 3", id: "nyc3"}
+            {name: "New York 1", managePath:"#", removePath:"#"}
+            {name: "New York 2", managePath:"#", removePath:"#"}
+            {name: "New York 3", managePath:"#", removePath:"#"}
           ]
           meta:
             instructions:'Create an API key on your <a href="#">Google Compute API page</a>, or view the <a href="//docs.nanobox.io">full guide</a>.'

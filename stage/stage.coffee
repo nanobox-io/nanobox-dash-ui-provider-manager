@@ -41,12 +41,15 @@ updateProvider = (data, cb) ->
   ,
     1200 * Math.random()
 
+addProviderClick = () -> console.log 'add provider clicked'
+
 
 
 params =
-  accounts        : shim.getAccounts()
-  endpointTester  : endpointTester
-  verifyAccount   : verifyAccount
-  updateProvider  : updateProvider
+  accounts         : shim.getAccounts()
+  endpointTester   : endpointTester
+  verifyAccount    : verifyAccount
+  updateProvider   : updateProvider
+  addProviderClick : addProviderClick
 
 app = new nanobox.ProviderAccounts( $(".main-holder"), params )
