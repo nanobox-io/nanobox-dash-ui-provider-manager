@@ -8,7 +8,7 @@ class ProviderAccounts
 
   showAccount : (providerId) =>
     @accountList.hide()
-    @account = new ProviderEdit @$el, @getAccountData(providerId), @data.endpointTester, @data.verifyAccount, @data.updateProvider, @hideAccount
+    @account = new ProviderEdit @$el, @getAccountData(providerId), @data.endpointTester, @data.verifyAccount, @data.updateProvider, @data.deleteAccount, @hideAccount
 
   hideAccount : () =>
     @account.destroy()

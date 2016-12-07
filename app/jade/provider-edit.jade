@@ -15,12 +15,17 @@
     .provider-specific
 
   .save-section
+    if apps.length == 0 
+      #delete-account 
+        img.shadow-icon(data-src="close-x")
+        .txt Delete Account 
     .cancel#cancel Cancel
     .button.lifecycle#save Save 
-  .apps
-    h2 Apps launched on this account
-    each app in apps
-      .app
-        .name= app.name
-        a.manage(href="#{app.managePath}") Manage
-        a(href="#{app.removePath}") Remove
+  if apps.length != 0
+    .apps
+      h2 Apps launched on this account
+      each app in apps
+        .app
+          .name= app.name
+          a.manage(href="#{app.managePath}") Manage
+          a(href="#{app.removePath}") Remove

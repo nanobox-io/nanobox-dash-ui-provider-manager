@@ -4,7 +4,7 @@ select               = require 'jade/select'
 
 module.exports = class Provider
 
-  constructor: ($el, @accountData, @testEndpoint, @verifyAccount, @save, onCancel) ->
+  constructor: ($el, @accountData, @testEndpoint, @verifyAccount, @save, @deleteAccount, onCancel) ->
     @provider      = @accountData.provider    # provider
     @validEndpoint = @provider.endpoint       # Initial endpint if it exists
     if @accountData.provider.endpoint?
@@ -14,9 +14,10 @@ module.exports = class Provider
     @$testEndpointBtn = $("#test-endpoint", @$node)
     @$saveBtn         = $("#save", @$node)
 
-    $("#cancel", @$node).on   'click', onCancel
-    @$saveBtn.on              'click', (e)=> @onSaveClick()
-    $("#endpoint", @$node).on 'input', (e)=> @onEndpointEdit e.currentTarget.value
+    $("#cancel", @$node).on         'click', onCancel
+    @$saveBtn.on                    'click', (e)=> @onSaveClick()
+    $("#delete-account", @$node).on 'click', (e)=> @deleteAccountClick(e)
+    $("#endpoint", @$node).on       'input', (e)=> @onEndpointEdit e.currentTarget.value
 
     @$testEndpointBtn.on 'click', (e)=>
       @endpoint = $("#endpoint", @$node).val()
@@ -35,8 +36,10 @@ module.exports = class Provider
       @$testEndpointBtn.removeClass 'hidden'
       @$testEndpointBtn.removeClass 'success'
       @$testEndpointBtn.text 'Test Endpoint'
+      @$saveBtn.addClass 'disabled'
     else
       @$testEndpointBtn.addClass 'hidden'
+      @$saveBtn.removeClass 'disabled'
 
   onTestEndpoint : (endpoint) ->
     @$testEndpointBtn.addClass 'ing'
@@ -52,6 +55,7 @@ module.exports = class Provider
         @$testEndpointBtn.text 'Test Endpoint'
       # Valid Endpoint
       else
+        @$saveBtn.removeClass 'disabled'
         @provider = results.provider
         @validEndpoint = endpoint
         @$testEndpointBtn.text 'Success!'
@@ -89,7 +93,18 @@ module.exports = class Provider
           # Save Successful!
           else
             @$saveBtn.text('Saved!').removeClass('ing').addClass "success"
-            setTimeout "location.reload(true);", 1000
+            @refreshPage()
+
+  deleteAccountClick : (e) ->
+    # The first time the user clicks delete, show the confirm message
+    if e.currentTarget.className.indexOf("confirm") == -1
+      e.currentTarget.className = "confirm"
+    else
+      @deleteAccount @accountData.id, (results)=>
+        if results.error
+          @addError results.error
+        else
+          @refreshPage()
 
   # ------------------------------------ Helpers
 
@@ -116,6 +131,8 @@ module.exports = class Provider
 
   clearErrors : () ->
     $(".errors", @$node).addClass 'hidden'
+
+  refreshPage : () -> setTimeout "location.reload(true);", 1000
 
   destroy : ()->
     $("#cancel", @$node).off()

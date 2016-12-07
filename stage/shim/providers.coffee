@@ -63,7 +63,6 @@ module.exports = class ProvidersShim
             instructions:'Create an API key on your <a href="#">Google Compute API page</a>, or view the <a href="//docs.nanobox.io">full guide</a>.'
         defaultRegion   : {name:"Singapore", id:"s1"}
         apps            : [
-          {name:"home", managePath:"#", removePath:"#"}
         ]
       }
     ]

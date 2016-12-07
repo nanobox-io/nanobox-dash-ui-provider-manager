@@ -1,4 +1,6 @@
 ✔ Add provider button     done(√)
-☐ Add ability to delete account
+✔ Add ability to delete account     done(√)
 ✔ Add some padding at the top of the component     done(√)
 ✔ Add manage / delete actions     done(√)
+✔ Still no SVG with the id ‘custom’     done(√)
+☐ After editing endpoint, but before testing it, save button should be disabled.
