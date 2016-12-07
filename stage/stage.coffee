@@ -4,8 +4,8 @@ shim = new ProvidersShim()
 
 # ------------------------------------ Simulate rails methods..
 
-deleteAccount = (accountId, cb) ->
-  console.log "Deleting account : #{accountId}"
+deleteAccount = (accountId, providerId, cb) ->
+  console.log "Deleting account #{accountId} on the #{providerId} provider"
   setTimeout ()->
     data =
       error : "Unable to delete, try again in a moment"

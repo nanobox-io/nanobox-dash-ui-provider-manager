@@ -83,8 +83,10 @@ module.exports = class Provider
         $nonAuthFields = $("input:not(.auth-field)")
         for item in $nonAuthFields
           data[item.getAttribute('data-key')] = item.value
-        data.authFields = authFields
+        data.authFields    = authFields
         data.defaultRegion = $("#regions select")[0].value
+        data.accountId     = @accountData.id
+        data.providerId    = @accountData.provider.id
         @save data, (saveResults)=>
           # Error Saving:
           if saveResults.error
@@ -100,7 +102,7 @@ module.exports = class Provider
     if e.currentTarget.className.indexOf("confirm") == -1
       e.currentTarget.className = "confirm"
     else
-      @deleteAccount @accountData.id, (results)=>
+      @deleteAccount @accountData.id, @accountData.provider.id, (results)=>
         if results.error
           @addError results.error
         else
