@@ -80,11 +80,11 @@ module.exports = class Provider
         @$saveBtn.text('Saving')
         # Grab all the data and save it via rails:
         data = {}
-        $nonAuthFields = $("input:not(.auth-field)")
+        $nonAuthFields = $ "input:not(.auth-field)", @$node
         for item in $nonAuthFields
           data[item.getAttribute('data-key')] = item.value
         data.authFields    = authFields
-        data.defaultRegion = $("#regions select")[0].value
+        data.defaultRegion = $("#regions select", @$node)[0].value
         data.accountId     = @accountData.id
         data.providerId    = @accountData.provider.id
         @save data, (saveResults)=>

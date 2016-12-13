@@ -5,7 +5,7 @@ module.exports = class ProvidersShim
   getAccounts : () ->
     [
       {
-        name            : "Personal"
+        name            : "Personality"
         id              : "abc123"
         defaultRegion   : {name:"Amsterdam 2", id:"am2"}
         provider:
