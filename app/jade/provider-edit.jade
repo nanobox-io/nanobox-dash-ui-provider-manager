@@ -1,4 +1,4 @@
-.provider-edit
+.provider-edit.lexi-blue.lexi
   .errors.hidden Some Error
   .icon
     img.shadow-icon(data-src="#{provider.icon}" scalable="true")
@@ -6,11 +6,11 @@
     .standard
       .val
         .label Account Name
-        input.lexi(value="#{name}" data-key="name")
+        input(value="#{name}" data-key="name")
       if isCustom
         .val
           .label Endpoint
-          input#endpoint.lexi(value="#{provider.endpoint}" data-key="endpoint")
+          input#endpoint(value="#{provider.endpoint}" data-key="endpoint")
           .button#test-endpoint.lifecycle.hidden Test Endpoint
     .provider-specific
 

@@ -4,13 +4,13 @@ select               = require 'jade/select'
 
 module.exports = class Provider
 
-  constructor: ($el, @accountData, @testEndpoint, @verifyAccount, @save, @deleteAccount, onCancel) ->
+  constructor: (@$el, @accountData, @testEndpoint, @verifyAccount, @save, @deleteAccount, onCancel) ->
     @provider      = @accountData.provider    # provider
     @validEndpoint = @provider.endpoint       # Initial endpint if it exists
     if @accountData.provider.endpoint?
       @accountData.isCustom = true
     @$node = $ providerEdit( @accountData )
-    $el.append @$node
+    @$el.append @$node
     @$testEndpointBtn = $("#test-endpoint", @$node)
     @$saveBtn         = $("#save", @$node)
 
@@ -126,8 +126,8 @@ module.exports = class Provider
     $select = $(select( {items:@provider.regions} ))
     $select.val @accountData.defaultRegion.id
     $("#regions", $node).append $select
-    lexify $("#regions", $node)
-
+    lexify @$el
+    
   addError : (error) ->
     $(".errors", @$node).text(error).removeClass 'hidden'
 
