@@ -1,4 +1,4 @@
-.provider-edit.lexi-blue.lexi
+.blue-item.provider-edit.lexi-blue.lexi
   .errors.hidden Some Error
   .icon
     img.shadow-icon(data-src="#{provider.icon}" scalable="true")
@@ -16,16 +16,16 @@
 
   .save-section
     if apps.length == 0 
-      #delete-account 
+      .delete#delete-account 
         img.shadow-icon(data-src="close-x")
         .txt Delete Account 
     .cancel#cancel Cancel
     .button.lifecycle#save Save 
   if apps.length != 0
-    .apps
+    .sub-items
       h2 Apps launched on this account
       each app in apps
-        .app
+        .item
           .name= app.name
           a.manage(href="#{app.managePath}") Manage
           a(href="#{app.removePath}") Remove

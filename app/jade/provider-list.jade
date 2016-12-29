@@ -1,6 +1,6 @@
-.provider-list
+.blue-list
   each account in accounts
-    .provider
+    .item
       .icon
         img.shadow-icon(data-src="#{account.provider.icon}" scalable="true")
       .info
@@ -11,6 +11,6 @@
           .label TotalApps
           .val=account.apps.length
       .button(data-id="#{account.id}") Manage
-  .btn#add-provider-account
+  .add-new.btn#add-provider-account
     img.shadow-icon(data-src="big-add")
     .txt Add Account

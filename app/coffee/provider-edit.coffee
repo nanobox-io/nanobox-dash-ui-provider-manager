@@ -100,7 +100,7 @@ module.exports = class Provider
   deleteAccountClick : (e) ->
     # The first time the user clicks delete, show the confirm message
     if e.currentTarget.className.indexOf("confirm") == -1
-      e.currentTarget.className = "confirm"
+      e.currentTarget.className = "#{e.currentTarget.className} confirm"
     else
       @deleteAccount @accountData.id, @accountData.provider.id, (results)=>
         if results.error
@@ -127,7 +127,7 @@ module.exports = class Provider
     $select.val @accountData.defaultRegion.id
     $("#regions", $node).append $select
     lexify @$el
-    
+
   addError : (error) ->
     $(".errors", @$node).text(error).removeClass 'hidden'
 
