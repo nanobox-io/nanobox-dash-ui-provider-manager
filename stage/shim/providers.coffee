@@ -49,7 +49,7 @@ module.exports = class ProvidersShim
         defaultRegion   : {"New York 1", id: "nyc1"}
         provider        :
           name:'Google Compute'
-          icon:'linode'
+          icon:'packet'
           id:'linode'
           authFields:[
             {label:'API Key', key:'api_key', val:"asdf" }
