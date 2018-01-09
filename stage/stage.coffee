@@ -9,5 +9,4 @@ data =
   # The elm message to retrieve the data this component needs for instantiation
   getInitData : 'getAccountData'
 
-bridge = new RainbowBridge($(".main-holder"), data)
-# bridge.instantiateComponent
+bridge = new RainbowBridge $(".main-holder"), data
