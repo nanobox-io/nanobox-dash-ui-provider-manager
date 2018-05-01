@@ -8,7 +8,7 @@ deleteAccount = (accountId, providerId, cb) ->
   console.log "Deleting account #{accountId} on the #{providerId} provider"
   setTimeout ()->
     data =
-      error : "Unable to delete, try again in a moment"
+      error : "Unable to delete, try again in a few moments"
     if Math.random() > 0.6 then data.error = false
     cb data
   ,
