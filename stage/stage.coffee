@@ -47,7 +47,7 @@ updateProvider = (data, cb) ->
   setTimeout ()->
     data =
       error: "Unable to save.."
-    if Math.random() < 0.6 then data.error = false
+    # if Math.random() < 0.6 then data.error = false
     cb data
   ,
     1200 * Math.random()

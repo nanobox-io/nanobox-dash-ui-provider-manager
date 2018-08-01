@@ -41,6 +41,11 @@ module.exports = class ProvidersShim
           {name:"app 4",  managePath:"#", removePath:"#"}
           {name:"app 5",  managePath:"#", removePath:"#"}
         ]
+        meta:{
+          serverOrderConfig:
+            foo  : "bar"
+            baz  : "foo"
+        }
       }
       ,
       {
@@ -84,4 +89,5 @@ module.exports = class ProvidersShim
       ]
       meta:
         instructions:'Grab your credentials on <a href="#">Ted\'s main site</a> , or view Ted\'s<a href="#">full guide</a>.'
+
     }

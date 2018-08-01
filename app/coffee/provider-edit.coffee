@@ -1,5 +1,6 @@
 providerEdit         = require 'jade/provider-edit'
 providerSpecificVals = require 'jade/provider-specific-vals'
+keyVal               = require 'jade/key-val'
 select               = require 'jade/select'
 
 module.exports = class Provider
@@ -24,7 +25,10 @@ module.exports = class Provider
       @onTestEndpoint @endpoint
 
     @$authFields = $(".provider-specific", @$node)
+    @$advanced   = $(".advanced", @$node)
+    @$keyVals    = $(".key-vals", @$node)
     @addAuthFields()
+    @addMetaFields()
 
     castShadows(@$node)
 
@@ -87,6 +91,7 @@ module.exports = class Provider
         data.defaultRegion = $("#regions select", @$node)[0].value
         data.accountId     = @accountData.id
         data.providerId    = @accountData.provider.id
+        data.meta          = {serverOrderConfig:@getMetaFields()}
         @save data, (saveResults)=>
           # Error Saving:
           if saveResults.error
@@ -109,6 +114,40 @@ module.exports = class Provider
           @refreshPage()
 
   # ------------------------------------ Helpers
+
+  addMetaFields : () ->
+    @isVisible = false
+    $("#toggle", @$node).on 'click', ()=>
+      if @isVisible
+        @$advanced.removeClass 'visible'
+      else
+        @$advanced.addClass 'visible'
+      @isVisible = !@isVisible
+    @addExistingFields()
+    $('#addKeyVal', @$node).on 'click', ()=> @addKeyValPair()
+
+  addExistingFields : () ->
+    if @accountData.meta?
+      if @accountData.meta.serverOrderConfig?
+        for key, val of @accountData.meta.serverOrderConfig
+          @addKeyValPair key, val
+        return
+    @addKeyValPair()
+
+  getMetaFields : () ->
+    obj = {}
+    $('.key-val-pair', @$keyVals).each (index,$item)=>
+      key = $('.key', $($item)).val()
+      val = $('.val', $($item)).val()
+      if key.length > 0 && val.length > 0
+        obj[key] = val
+    return obj
+
+  addKeyValPair : (key="", val="") ->
+    $keyVal = $(keyVal({key:key, val:val}))
+    $('.item:last-of-type', @$keyVals).before $keyVal
+    $('.delete', $keyVal).on 'click', ()=> $keyVal.remove()
+    castShadows $keyVal
 
   addAuthFields : () ->
     @$authFields.empty()

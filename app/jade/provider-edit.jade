@@ -13,7 +13,15 @@
           input#endpoint(value="#{provider.endpoint}" data-key="endpoint")
           .button#test-endpoint.lifecycle.hidden Test Endpoint
     .provider-specific
-
+    .advanced
+      .toggle
+        a#toggle Advanced
+      .content 
+        .message Provide custom server order attributes for the provider, please refer to the documentation for this provider.
+        .key-vals
+          .item
+            .button#addKeyVal Add a new Key/Val Pair
+      
   .save-section
     if apps.length == 0 
       .delete#delete-account 

@@ -11,7 +11,8 @@ $success-green : #00B463;
       }
     }
   }
-  #test-endpoint {background: #128FD6; color:white; 
+  #test-endpoint {background: #128FD6; color:white;
     &:hover      {background: #0073B5;  }
   }
+  @import "advanced";
 }
