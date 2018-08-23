@@ -64,5 +64,5 @@ params =
   deleteAccount    : deleteAccount
   addProviderClick : addProviderClick
 
-
+console.log params
 app = new nanobox.ProviderAccounts( $(".main-holder"), params )

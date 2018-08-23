@@ -84,7 +84,7 @@ module.exports = class Provider
         @$saveBtn.text('Saving')
         # Grab all the data and save it via rails:
         data = {}
-        $nonAuthFields = $ "input:not(.auth-field)", @$node
+        $nonAuthFields = $ "input:not(.auth-field, .key, .val)", @$node
         for item in $nonAuthFields
           data[item.getAttribute('data-key')] = item.value
         data.authFields    = authFields
