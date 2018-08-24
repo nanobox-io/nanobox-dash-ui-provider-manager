@@ -14,5 +14,10 @@ $success-green : #00B463;
   #test-endpoint {background: #128FD6; color:white;
     &:hover      {background: #0073B5;  }
   }
+  .provider-specific{
+    .obfuscate{flex-grow:2;
+      input{width:100%}
+    }
+  }
   @import "advanced";
 }

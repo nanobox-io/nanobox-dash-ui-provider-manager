@@ -4,4 +4,5 @@
 each field in provider.authFields
   .val
     .label= field.label
-    input.auth-field(value="#{field.val}" data-key="#{field.key}")
+    .obfuscate.white.right
+      input.auth-field(value="#{field.val}" data-key="#{field.key}")
